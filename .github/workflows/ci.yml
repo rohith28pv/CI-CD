@@ -2,6 +2,8 @@ name: Docker CI Cloud Build
 
 on:
   push:
+    branches: ["main", "my_new_ci"]
+  pull_request:
     branches: ["main"]
 
 jobs:
@@ -12,7 +14,18 @@ jobs:
     - name: Checkout repository code
       uses: actions/checkout@v4
 
-    - name: Build the Docker Image
+    - name: Setup Node.js Runtime
+      uses: actions/setup-node@v4
+      with:
+        node-version: '24'
+        cache: 'npm'
+
+    - name: Run Automated Application Tests
+      run:
+        npm ci
+        npm test
+
+      name: Build the Docker Image
       run:
         docker build -t my-first-image:latest .
-        echo "Docker image compiled successfully in the cloud!"
+        echo "Docker image compiled successfully "
