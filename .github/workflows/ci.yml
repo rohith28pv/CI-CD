@@ -17,6 +17,5 @@ jobs:
     - name: Step 2 - Check the shopping list rules
       run: |
         echo "Starting automated safety check"
-      # This command looks for the word 'MILK'. If it is not found this will pass.
         ! grep -i "Milk" shopping_list.txt
         echo "Safety check complete! No illegal items found."
