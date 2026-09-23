@@ -26,6 +26,6 @@ jobs:
         npm test
 
     - name: Build the Docker Image
-      run:
+      run: |
         docker build -t my-first-image:latest .
         echo "Docker image compiled successfully "
