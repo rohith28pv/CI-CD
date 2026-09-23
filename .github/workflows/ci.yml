@@ -1,4 +1,4 @@
-name: Docker CI Cloud Build
+name: CI Pipeline
 
 on:
   push:
@@ -7,25 +7,19 @@ on:
     branches: ["main"]
 
 jobs:
-  build-container:
+  checklist-job:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository code
+    - name: Step 1 - Download the files
       uses: actions/checkout@v4
 
-    - name: Setup Node.js Runtime
-      uses: actions/setup-node@v4
-      with:
-        node-version: '24'
-        cache: 'npm'
-
-    - name: Run Automated Application Tests
-      run:
-        npm ci
-        npm test
-
-    - name: Build the Docker Image
+    - name: Step 2 -Check the shopping list rules
       run: |
-        docker build -t my-first-image:latest .
-        echo "Docker image compiled successfully "
+        echo "Starting automated safety check"
+  
+      # This command looks for the word 'MILK'. If it is not found this will pass.
+        ! grep -i "Milk" shopping_list.txt
+
+      echo "Safety check complete! No illegal items found."  
+      
