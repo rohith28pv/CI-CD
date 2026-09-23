@@ -3,7 +3,9 @@
 	"version": "1.0.0",
 	"main": "server.js",
 	"scripts": {
-	  "test": "node --test app.test.js"
+		"test": "node --test app.test.js"
+	},
+	"dependencies": {
+		"express": "^5.2.1"
 	}
 }
-
